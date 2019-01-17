@@ -15,3 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/users/list', 'ComponentsController@user_list');
+
+Route::get('request/', [
+    'uses' => 'RequDemoController@getIndex',
+    'as' => 'request.index'
+]);
+
+Route::post('request/confirm', [
+    'uses' => 'RequDemoController@confirm',
+    'as' => 'request.confirm'
+]);
