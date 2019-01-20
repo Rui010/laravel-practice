@@ -27,10 +27,10 @@ class RequDemoController extends Controller
         $enquete->age = $request->age;
         $enquete->opinion = $request->opinion;
         $enquete->save();
-        $data = $request->all();
-        Mail::send('mail.temp', $data, function($message) use($data) {
-            $message->to($data["mail"])->subject($data["username"]);
-        });
+        // $data = $request->all();
+        // Mail::send('mail.temp', $data, function($message) use($data) {
+        //     $message->to($data["mail"])->subject($data["username"]);
+        // });
         return view('request.finish');
     }
 }
