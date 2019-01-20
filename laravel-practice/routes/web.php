@@ -25,3 +25,8 @@ Route::post('request/confirm', [
     'uses' => 'RequDemoController@confirm',
     'as' => 'request.confirm'
 ]);
+
+Route::post('request/finish', [
+    'uses' => 'RequDemoController@finish',
+    'as' => 'request.finish'
+]);

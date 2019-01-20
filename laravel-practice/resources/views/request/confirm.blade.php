@@ -12,7 +12,7 @@
 <div class="container">
     <h1>フォームサンプル（確認画面）</h1>
     <div class="row" id="content">
-        <form action="{{ route('request.confirm') }}" method="post">
+        <form action="{{ route('request.finish') }}" method="post">
             <div class="form-group">
                 <label for="username" class="control-label">名前</label>
                 <input type="text" name="username" class="form-control" value="{{$username}}" readonly>
@@ -29,6 +29,12 @@
                 <label for="opinion" class="control-label">ご意見</label>
                 <textarea type="text" name="opinion" class="form-control" readonly>{{$opinion}}</textarea>
             </div>
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="username" value="{{ $username }}">
+            <input type="hidden" name="mail" value="{{ $mail }}">
+            <input type="hidden" name="age" value="{{ $age }}">
+            <input type="hidden" name="opinion" value="{{ $opinion }}">
+            <input type="submit" name="button1" value="登録" class="btn btn-primary btn-wide">
         </form>
     </div>
 </div>

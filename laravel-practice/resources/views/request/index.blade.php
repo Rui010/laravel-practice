@@ -44,6 +44,27 @@
             <input type="submit" name="button1" value="送信" class="btn btn-default">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
         </form>
+        <hr>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>名前</th><th>メールアドレス</th><th>年齢</th><th>ご意見</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($enquetes as $enquete)
+                <tr>
+                    <td>{{ $enquete->username }}</td>
+                    <td>{{ $enquete->mail }}</td>
+                    <td>{{ $enquete->age }}</td>
+                    <td>{{ $enquete->opinion }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        <div class="text-center">
+        {{ $enquetes->links() }}
+        </div>
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
