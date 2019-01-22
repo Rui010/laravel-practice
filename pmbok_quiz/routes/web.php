@@ -12,6 +12,7 @@
 */
 use App\Pmbok_cell;
 use Illuminate\Http\Request;
+use App\Http\Pmbok_Cell_Controller;
 
 // 全PMBOKの知識エリアとPMプロセス群を表示
 Route::get('/', function () {
@@ -23,25 +24,11 @@ Route::get('/', function () {
 });
 
 // PMBOKのプロセスを追加
-Route::post('/cell', function (Request $request) {
-    $validator = Validator::make($request->all(), [
-        'knowledge_area'=>'required',
-        'pm_process_group'=>'required',
-        'no'=>'required',
-        'process'=>'required',
-    ]);
-    if ($validator->fails()) {
-        return redirect('/')
-            ->withInput()
-            ->withErrors($validator);
-    }
-    $pmbok_cell = new pmbok_cell;
-    $pmbok_cell->knowledge_area = $request->knowledge_area;
-    $pmbok_cell->pm_process_group = $request->pm_process_group;
-    $pmbok_cell->no = $request->no;
-    $pmbok_cell->process = $request->process;
-    $pmbok_cell->save();
+Route::post('/cell', 'Pmbok_Cell_Controller@postAction');
+Route::put('/cell', 'Pmbok_Cell_Controller@putAction');
 
+Route::delete('/cell/{cell}', function (pmbok_cell $pmbok_cell) {
+    $pmbok_cell->delete();
     return redirect('/');
 });
 
