@@ -7,6 +7,7 @@
     <div class="panel-body">
         <table class="table table-striped">
             <thead>
+                
                 <th>id</th>
                 <th>知識エリア</th>
                 <th>PMプロセス群</th>
@@ -17,12 +18,12 @@
             <tbody>
                 @foreach ($pmbok_cells as $cell)
                 <tr>
-                    <td class="table-text">{{ $cell->id }}</td>   
-                    <td class="table-text">{{ $cell->knowledge_area }}</td>                    
-                    <td class="table-text">{{ $cell->pm_process_group }}</td>                    
-                    <td class="table-text">{{ $cell->no }}</td>                    
-                    <td class="table-text">{{ $cell->process }}</td>
-                    <td class="table-text">
+                    <td data-label="id" class="table-text">{{ $cell->id }}</td>   
+                    <td data-label="知識エリア" class="table-text">{{ $cell->knowledge_area }}</td>                    
+                    <td data-label="PMプロセス群" class="table-text">{{ $cell->pm_process_group }}</td>                    
+                    <td data-label="No" class="table-text">{{ $cell->no }}</td>                    
+                    <td data-label="プロセス" class="table-text">{{ $cell->process }}</td>
+                    <td data-label="" class="table-text">
                         <form action="{{ url('cell/'.$cell->id) }}" method="POST">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
