@@ -16,12 +16,14 @@ services:
     volumes: 
       - .:/var/www/html
   mysql:
-    image: mysql:5.7
+    # image: mysql:5.7
+    build: ./docker/mysql
     environment: 
       MYSQL_DATABASE: sample
       MYSQL_USER: user
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
+      TZ: "Asia/Tokyo"
     ports: 
       - "3306:3306"
     volumes: 

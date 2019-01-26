@@ -1,6 +1,13 @@
 @extends('layouts.app')
 @section('content')
 
+<?php 
+// phpinfo();
+
+echo $pmbok_cells[0]->knowledge_area ;
+
+?>
+
 @if (count($pmbok_cells) > 0)
 <div class="panel panel-defalut">
     <div class="panel-heading">PMBOKの全体像</div>
