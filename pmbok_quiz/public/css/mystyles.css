@@ -1,3 +1,9 @@
+.tbl-r05 span {
+  display: block;
+  border: solid 1px #ccc;
+  padding: 3px;
+  margin-bottom: 5px;
+}
 @media screen and (max-width: 640px) {
     .tbl-r05 {
       width: 80%;
@@ -14,14 +20,16 @@
       width: 100%;
     }
     .tbl-r05 td:first-child {
-      background: #e9727e;
-      color: #fff;
+      background: #ddd;
+      color: #333;
       font-weight: bold;
       text-align: center;
     }
     .tbl-r05 td:before {
       content: attr(data-label);
-      float: left;
+      /* display: block;
+      float: left; */
       font-weight: bold;
       margin-right: 10px;
+    }
 }
