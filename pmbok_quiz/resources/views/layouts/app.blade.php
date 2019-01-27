@@ -28,7 +28,7 @@
                         <li id="menu-quiz"><a href="/quiz">クイズ</a></li>
                         <li id="menu-admin"><a href="/admin">管理画面</a></li>
                     </ul>
-                    <p class="navbar-text navbar-right">ようこそ <a href="#" class="navbar-link">ゲスト</a> さん。</p>
+                    <p class="navbar-text navbar-right">ようこそ <span id="username">ゲスト</span> さん。</p>
                 </div>
             </div>
         </nav>
@@ -57,7 +57,6 @@
             $('#menu-quiz').removeClass('active');
             $('#menu-admin').addClass('active');
         }
-        
     });
     </script>
 </body>

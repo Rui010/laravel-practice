@@ -23,6 +23,14 @@ Route::get('/', function () {
     ]);
 });
 
+// PMBOKのクイズ
+Route::get('/quiz', function() {
+    $pmbok_cells = Pmbok_cell::orderBy('id', 'asc')->get();
+    return view('pmbok_quiz', [
+        'pmbok_cells' => $pmbok_cells
+    ]);
+});
+
 // 全PMBOKの一覧と追加・編集フォーム
 Route::get('/admin', function () {
     // $pmbok_cells = Pmbok_cell::orderBy('id', 'asc')->get();
@@ -39,11 +47,5 @@ Route::put('/cell', 'Pmbok_Cell_Controller@putAction');
 
 Route::delete('/cell/{cell}', function (pmbok_cell $pmbok_cell) {
     $pmbok_cell->delete();
-    return redirect('/');
-});
-
-// PMBOKのクイズ
-Route::get('quiz', function() {
-    //
     return redirect('/');
 });
