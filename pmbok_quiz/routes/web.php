@@ -14,9 +14,19 @@ use App\Pmbok_cell;
 use Illuminate\Http\Request;
 use App\Http\Pmbok_Cell_Controller;
 
-// 全PMBOKの知識エリアとPMプロセス群を表示
+//　PMBOKの表
 Route::get('/', function () {
     $pmbok_cells = Pmbok_cell::orderBy('id', 'asc')->get();
+
+    return view('pmbok_table', [
+        'pmbok_cells' => $pmbok_cells
+    ]);
+});
+
+// 全PMBOKの一覧と追加・編集フォーム
+Route::get('/admin', function () {
+    // $pmbok_cells = Pmbok_cell::orderBy('id', 'asc')->get();
+    $pmbok_cells = Pmbok_cell::orderBy('id', 'asc')->paginate(7);
 
     return view('pmbok_cells', [
         'pmbok_cells' => $pmbok_cells
@@ -35,4 +45,5 @@ Route::delete('/cell/{cell}', function (pmbok_cell $pmbok_cell) {
 // PMBOKのクイズ
 Route::get('quiz', function() {
     //
+    return redirect('/');
 });
