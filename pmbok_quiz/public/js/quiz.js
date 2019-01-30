@@ -1,12 +1,33 @@
-(function() {
+$(function() {
     'use strict';
     var NUM_QUESTION = 10;
+    $('#cover').fakeLoader({
+        timeToHide: 6000,
+        zIndex: "999",
+    });
     axios
     .get('/api/cell')
     .then((respose)=>{
         // console.log(respose);
-        main(createQuiz(respose.data))
+        main(createQuiz(respose.data));
+        $("#cover").fadeOut("normal");
     });
+
+    var shuffleList = (max, num, remove_list=[]) => {
+        var arr = Array(max);
+        arr = arr.fill(0).map((x,i) => x + i);
+        arr = arr.filter(function(x) {
+            return remove_list.indexOf(x) == -1;
+        });
+
+        for (var i = 0; i < arr.length; i++) {
+            var rand = Math.floor(Math.random() * (i + 1));
+            var tmp = arr[i];
+            arr[i] = arr[rand];
+            arr[rand] = tmp;
+        }
+        return arr.slice(0,num);
+    };
     
     var createQuiz = (data) => {
         // console.log(data);
@@ -14,13 +35,18 @@
         var process = data.map(x=>x['process']);
         
         // console.log(knowledge_area,pm_process_group,process);
+        var r = shuffleList(data.length,NUM_QUESTION);
         for (var i = 0; i < NUM_QUESTION; i++) {
             var temp = {};
-            temp.question = data[i]['knowledge_area'] + " / " + data[i]['pm_process_group'];
+            temp.question = "【知識エリア】　" + data[r[i]]['knowledge_area'] + " \n【プロセス群】　" + data[r[i]]['pm_process_group'];
             temp.answers = [];
-            temp.answers[0] = data[i]['process'];
-            temp.answers[1] = "aa";
-            temp.answer = 0;
+            var rq = shuffleList(process.length,3);
+            var ra = shuffleList(4,4);
+            temp.answers[ra[0]] = data[r[i]]['process'];
+            temp.answers[ra[1]] = process[rq[0]];
+            temp.answers[ra[2]] = process[rq[1]];
+            temp.answers[ra[3]] = process[rq[2]];
+            temp.answer = ra[0];
             quizSet.push(temp);
         }
         console.log(quizSet);
@@ -85,7 +111,7 @@
                     } else {
                         this.questionIndex++;
                     }
-                }
+                },
             },
             computed: {
                 currentQuestion: function() {
@@ -97,4 +123,4 @@
             }
         });    
     };
-})();
+});

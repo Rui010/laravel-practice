@@ -1,13 +1,14 @@
 @extends('layouts.app')
 @section('content')
 
-<div id="app">
+<div id="cover" class="fakeloader"></div>
+<div id="app" v-cloak>
     <div class="panel panel-default" v-if="this.questions.length != this.answers.length">
         <div class="panel-heading">
             <h4 class="list-group-item-heading">第　@{{ questionIndex + 1 }}　問 / 全@{{ numQuestion }}問</h4>
         </div>
         <div class="panel-body">
-            <p>@{{ currentQuestion.question }}</p>
+            <p style="white-space:pre-wrap; word-wrap:break-word;">@{{ currentQuestion.question }}</p>
         </div>
         <div class="list-group">
             <a type="button" class="list-group-item"
@@ -28,7 +29,10 @@
         </div>
     </div>
 </div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 <script src="js/quiz.js?<?php time(); ?>"></script>
+<script src="js/fakeLoader.min.js?<?php time(); ?>"></script>
 @endsection

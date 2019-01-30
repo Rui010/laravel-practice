@@ -4,6 +4,9 @@
   padding: 3px;
   margin-bottom: 5px;
 }
+[v-cloak] {
+  display: none;
+}
 @media screen and (max-width: 640px) {
     .tbl-r05 {
       width: 80%;
