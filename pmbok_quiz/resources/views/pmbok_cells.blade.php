@@ -13,6 +13,7 @@
                 <th>PMプロセス群</th>
                 <th>No</th>
                 <th>プロセス</th>
+                <th>重複フラグ</th>
                 <th>&nbsp;</th>
             </thead>
             <tbody>
@@ -23,6 +24,14 @@
                     <td data-label="PMプロセス群" class="table-text">{{ $cell->pm_process_group }}</td>                    
                     <td data-label="No" class="table-text">{{ $cell->no }}</td>                    
                     <td data-label="プロセス" class="table-text">{{ $cell->process }}</td>
+                    <td data-label="" class="table-text">
+                        {{ $cell->duplication_flag }}
+                        <form action="{{ url('cell/'.$cell->id) }}" method="POST">
+                            {{ csrf_field() }}
+                            {{ method_field('PUT') }}
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-flag"></i></button>
+                        </form>
+                    </td>    
                     <td data-label="" class="table-text">
                         <form action="{{ url('cell/'.$cell->id) }}" method="POST">
                             {{ csrf_field() }}
@@ -107,6 +116,12 @@
             <label for="process" class="col-sm-3 control-label">項目</label>
             <div class="col-sm-6">
                 <input type="text" name="process" id="process" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="duplication_flag" class="col-sm-3 control-label">重複フラグ</label>
+            <div class="col-sm-6">
+                <input type="text" name="duplication_flag" id="duplication_flag" class="form-control">
             </div>
         </div>
         <div class="form-group">

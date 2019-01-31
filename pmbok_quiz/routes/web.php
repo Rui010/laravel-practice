@@ -49,3 +49,5 @@ Route::delete('/cell/{cell}', function (pmbok_cell $pmbok_cell) {
     $pmbok_cell->delete();
     return redirect('/');
 });
+
+Route::put('/cell/{cell}', 'Pmbok_Cell_Controller@putDuplicationFlag');

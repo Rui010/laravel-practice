@@ -28,7 +28,33 @@ $(function() {
         }
         return arr.slice(0,num);
     };
+
+    var serchSameCell = (data, knowledge_area, pm_process_group) => {
+        var ret = [];
+        ret = data.filter(function(x) {
+            return x["knowledge_area"] == knowledge_area;
+        }).filter(function(x) {
+            return x["pm_process_group"] == pm_process_group;
+        }).map((x)=>{
+            return x["id"];
+        });
+        return ret;
+    };
     
+    var serchSameCellProcess = (id, data, knowledge_area, pm_process_group) => {
+        var ret = [];
+        ret = data.filter(function(x) {
+            return x["knowledge_area"] == knowledge_area;
+        }).filter(function(x) {
+            return x["pm_process_group"] == pm_process_group;
+        }).filter((x)=>{
+            return x["id"] != id;
+        }).map((x)=>{
+            return x["process"];
+        });
+        return ret;
+    };
+
     var createQuiz = (data) => {
         // console.log(data);
         var quizSet = [];
@@ -40,7 +66,15 @@ $(function() {
             var temp = {};
             temp.question = "【知識エリア】　" + data[r[i]]['knowledge_area'] + " \n【プロセス群】　" + data[r[i]]['pm_process_group'];
             temp.answers = [];
-            var rq = shuffleList(process.length,3);
+            var sameArea = [];
+            var sameAreaProcess = [];
+            if (data[r[i]]['duplication_flag'] === '1') {
+                sameArea = serchSameCell(data, data[r[i]]['knowledge_area'], data[r[i]]['pm_process_group']);
+                sameAreaProcess = serchSameCellProcess(data[r[i]]['id'], data, data[r[i]]['knowledge_area'], data[r[i]]['pm_process_group']);
+            }
+            // console.log(sameArea);
+            temp.question += '\n同一エリア：' + sameAreaProcess.join(" - ") + " -  ? ";
+            var rq = shuffleList(process.length,3, sameArea);
             var ra = shuffleList(4,4);
             temp.answers[ra[0]] = data[r[i]]['process'];
             temp.answers[ra[1]] = process[rq[0]];
@@ -49,7 +83,7 @@ $(function() {
             temp.answer = ra[0];
             quizSet.push(temp);
         }
-        console.log(quizSet);
+        // console.log(quizSet);
         return quizSet;
     };
     var main = (data) => {
