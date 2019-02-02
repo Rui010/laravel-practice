@@ -32,7 +32,14 @@
                         <li id="menu-quiz"><a href="/quiz">クイズ</a></li>
                         <li id="menu-admin"><a href="/admin">管理画面</a></li>
                     </ul>
-                    <p class="navbar-text navbar-right">ようこそ <span id="username">ゲスト</span> さん。</p>
+                    @if (isset($user))
+                    <p class="navbar-text navbar-right"><a href="/logout">ログアウト</a></p>
+                    <p class="navbar-text navbar-right">ようこそ <span id="username">{{ $user->name }}</span> さん。</p>
+                    @else
+                    <p class="navbar-text navbar-right"><a href="/register">ユーザ登録</a></p>
+                    <p class="navbar-text navbar-right"><a href="/login">ログイン</a></p>
+                    @endif
+                    
                 </div>
             </div>
         </nav>

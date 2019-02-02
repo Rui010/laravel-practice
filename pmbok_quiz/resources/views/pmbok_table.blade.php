@@ -3,7 +3,7 @@
 
 <?php 
 // phpinfo();
-
+// echo $user;
 $list_pm_process_group = array(
     "立上げプロセス群", "計画プロセス群", "実行プロセス群", "監視・コントロール・プロセス群", "終結プロセス群");
 $list_knowledge_area = array(

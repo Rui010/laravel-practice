@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::resource('cell', 'RestApiController');
 Route::resource('table', 'CustomApiController');
+Route::resource('score', 'RestScoreController');

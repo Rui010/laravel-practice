@@ -142,6 +142,21 @@ $(function() {
                             }
                         }
                         this.correctCount = correctCount;
+                        if ("<?php echo $user->name; ?>") {
+                            data = {
+                                username: "<?php echo $user->name; ?>",
+                                score: this.correctCount
+                            };
+                            console.log(data);
+                            axios.post('/api/score', {
+                                username: "<?php echo $user->name; ?>",
+                                score: this.correctCount
+                            }, {
+                                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                            }).then((respose)=>{
+                                console.log(respose);
+                            });
+                        }
                     } else {
                         this.questionIndex++;
                     }

@@ -13,21 +13,27 @@
 use App\Pmbok_cell;
 use Illuminate\Http\Request;
 use App\Http\Pmbok_Cell_Controller;
+// use Illuminate\Support\Facade\Auth;
 
 //　PMBOKの表
 Route::get('/', function () {
     $pmbok_cells = Pmbok_cell::orderBy('id', 'asc')->get();
+    $user = Auth::user();
 
     return view('pmbok_table', [
-        'pmbok_cells' => $pmbok_cells
+        'pmbok_cells' => $pmbok_cells,
+        'user' => $user
     ]);
 });
 
 // PMBOKのクイズ
 Route::get('/quiz', function() {
     $pmbok_cells = Pmbok_cell::orderBy('id', 'asc')->get();
+    $user = Auth::user();
+
     return view('pmbok_quiz', [
-        'pmbok_cells' => $pmbok_cells
+        'pmbok_cells' => $pmbok_cells,
+        'user' => $user
     ]);
 });
 
@@ -35,10 +41,18 @@ Route::get('/quiz', function() {
 Route::get('/admin', function () {
     // $pmbok_cells = Pmbok_cell::orderBy('id', 'asc')->get();
     $pmbok_cells = Pmbok_cell::orderBy('id', 'asc')->paginate(7);
+    $user = Auth::user();
+
 
     return view('pmbok_cells', [
-        'pmbok_cells' => $pmbok_cells
+        'pmbok_cells' => $pmbok_cells,
+        'user' => $user
     ]);
+})->middleware('auth');
+
+Route::get('/logout', function(){
+    Auth::logout();
+    return redirect('/');
 });
 
 // PMBOKのプロセスを追加
@@ -51,3 +65,7 @@ Route::delete('/cell/{cell}', function (pmbok_cell $pmbok_cell) {
 });
 
 Route::put('/cell/{cell}', 'Pmbok_Cell_Controller@putDuplicationFlag');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
