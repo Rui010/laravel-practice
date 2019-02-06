@@ -11,6 +11,7 @@
 |
 */
 use App\Pmbok_cell;
+use App\score;
 use Illuminate\Http\Request;
 use App\Http\Pmbok_Cell_Controller;
 // use Illuminate\Support\Facade\Auth;
@@ -19,10 +20,15 @@ use App\Http\Pmbok_Cell_Controller;
 Route::get('/', function () {
     $pmbok_cells = Pmbok_cell::orderBy('id', 'asc')->get();
     $user = Auth::user();
-
+    if (isset($user)) {
+        $score = score::where('user_id', $user->id)->get();
+    } else {
+        $score = [];
+    }
     return view('pmbok_table', [
         'pmbok_cells' => $pmbok_cells,
-        'user' => $user
+        'user' => $user,
+        'score'=>$score,
     ]);
 });
 
@@ -42,7 +48,6 @@ Route::get('/admin', function () {
     // $pmbok_cells = Pmbok_cell::orderBy('id', 'asc')->get();
     $pmbok_cells = Pmbok_cell::orderBy('id', 'asc')->paginate(7);
     $user = Auth::user();
-
 
     return view('pmbok_cells', [
         'pmbok_cells' => $pmbok_cells,

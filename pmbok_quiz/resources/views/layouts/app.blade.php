@@ -34,9 +34,9 @@
                     </ul>
                     @if (isset($user))
                     <p class="navbar-text navbar-right"><a href="/logout">ログアウト</a></p>
-                    <p class="navbar-text navbar-right">ようこそ <span id="username">{{ $user->name }}</span> さん。</p>
+                    <p class="navbar-text navbar-right" id="data" data-name="{{ $user->name }}">ようこそ <span id="username">{{ $user->name }}</span> さん。</p>
                     @else
-                    <p class="navbar-text navbar-right"><a href="/register">ユーザ登録</a></p>
+                    <p class="navbar-text navbar-right" id="data" data-name="guest"><a href="/register">ユーザ登録</a></p>
                     <p class="navbar-text navbar-right"><a href="/login">ログイン</a></p>
                     @endif
                     

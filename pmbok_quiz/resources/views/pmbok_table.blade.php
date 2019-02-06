@@ -54,7 +54,7 @@ function process_split($process) {
 ?>
 @if (count($pmbok_cells) > 0)
 <div class="panel panel-defalut">
-    <div class="panel-heading">PMBOKの全体像</div>
+    <div class="panel-heading"><h1>PMBOKの全体像</h1></div>
     <div class="panel-body">
         <table class="table table-striped tbl-r05">
             <tr class="thead">
@@ -78,4 +78,27 @@ function process_split($process) {
 </div>
 @endif
 
+@if (count($score) > 0)
+<div class="panel panel-defalut">
+    <div class="panel-heading"><h2>得点履歴</h2></div>
+    <div class="panel-body">
+        <table class="table table-striped">
+            <thead>
+                <th>日付</th>
+                <th>得点</th>
+            </thead>
+            <tbody>  
+                @foreach($score as $s)
+                <tr>
+                    <td>{{ $s->user->name }}</td>
+                    <td>{{ $s->created_at }}</td>
+                    <td>{{ $s->score }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+            
+            </table>
+    </div>
+</div>
+@endif
 @endsection

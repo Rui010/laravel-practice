@@ -71,9 +71,9 @@ $(function() {
             if (data[r[i]]['duplication_flag'] === '1') {
                 sameArea = serchSameCell(data, data[r[i]]['knowledge_area'], data[r[i]]['pm_process_group']);
                 sameAreaProcess = serchSameCellProcess(data[r[i]]['id'], data, data[r[i]]['knowledge_area'], data[r[i]]['pm_process_group']);
+                temp.question += '\n同一エリア：' + sameAreaProcess.join(" - ") + " -  ? ";
             }
             // console.log(sameArea);
-            temp.question += '\n同一エリア：' + sameAreaProcess.join(" - ") + " -  ? ";
             var rq = shuffleList(process.length,3, sameArea);
             var ra = shuffleList(4,4);
             temp.answers[ra[0]] = data[r[i]]['process'];
@@ -142,17 +142,10 @@ $(function() {
                             }
                         }
                         this.correctCount = correctCount;
-                        if ("<?php echo $user->name; ?>") {
-                            data = {
-                                username: "<?php echo $user->name; ?>",
-                                score: this.correctCount
-                            };
-                            console.log(data);
+                        if ($('#data').data('name') != "guest") {
                             axios.post('/api/score', {
-                                username: "<?php echo $user->name; ?>",
-                                score: this.correctCount
-                            }, {
-                                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                                username: $('#data').data('name'),
+                                score: correctCount
                             }).then((respose)=>{
                                 console.log(respose);
                             });

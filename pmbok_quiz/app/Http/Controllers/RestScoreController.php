@@ -39,6 +39,7 @@ class RestScoreController extends Controller
     {
         //
         $score = new Score;
+        // $request = json_decode($request);
         $score->username = $request->username;
         $score->score = $request->score;
         $score->save();
